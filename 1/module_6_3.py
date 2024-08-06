@@ -15,7 +15,7 @@ class Eagle:
         self.y_distance += dy
 
 
-class Pegasus(Eagle, Horse):
+class Pegasus(Horse, Eagle):
     def move(self, dx, dy):
         self.run(dx)
         self.fly(dy)
