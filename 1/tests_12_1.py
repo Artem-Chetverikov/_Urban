@@ -36,5 +36,5 @@ class RunnerTest(TestCase):
 
         for _ in range(10):
             run_1.run()
-            run_1.walk()
+            run_2.walk()
         self.assertNotEqual(run_1.distance, run_2.distance)
