@@ -1,3 +1,4 @@
+import unittest
 from unittest import *
 
 
@@ -48,20 +49,26 @@ class Tournament:
         return finishers
 
 
+
 class RunnerTest(TestCase):
 
+    is_frozen = False
+
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_walk(self):
         run_1 = Runner("Бегун №1")
         for _ in range(10):
             run_1.walk()
         self.assertEqual(run_1.distance, 50)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run(self):
         run_1 = Runner("Бегун №1")
         for _ in range(10):
             run_1.run()
         self.assertEqual(run_1.distance, 100)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_challenge(self):
         run_1 = Runner("Бегун №1")
         run_2 = Runner("Бегун №2")
@@ -74,6 +81,8 @@ class RunnerTest(TestCase):
 
 class TournamentTest(TestCase):
 
+    is_frozen = True
+
     @classmethod
     def setUpClass(cls):
         cls.all_results = []
@@ -83,24 +92,28 @@ class TournamentTest(TestCase):
         self.run_2 = Runner('Андрей', 9)
         self.run_3 = Runner('Ник', 3)
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run_01(self):
         tour = Tournament(90, self.run_1, self.run_3)
         self.all_results.append(tour.start())
         max_key = max(key_i for key_i, val_i in self.all_results[-1].items())
         self.assertTrue(self.all_results[-1][max_key] == 'Ник')
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run_02(self):
         tour = Tournament(90, self.run_2, self.run_3)
         self.all_results.append(tour.start())
         max_key = max(key_i for key_i, item_i in self.all_results[-1].items())
         self.assertTrue(self.all_results[-1][max_key] == 'Ник')
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run_03(self):
         tour = Tournament(90, self.run_1, self.run_2, self.run_3)
         self.all_results.append(tour.start())
         max_key = max(key_i for key_i, item_i in self.all_results[-1].items())
         self.assertTrue(self.all_results[-1][max_key] == 'Ник')
 
+    @unittest.skipIf(is_frozen, 'Тесты в этом кейсе заморожены')
     def test_run_04(self):
         tour = Tournament(1, self.run_3, self.run_2, self.run_1)
         self.all_results.append(tour.start())
