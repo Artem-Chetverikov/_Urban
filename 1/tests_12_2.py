@@ -85,4 +85,6 @@ class TournamentTest(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print(cls.all_results)
+        print()
+        for res in cls.all_results:
+            print(res)
