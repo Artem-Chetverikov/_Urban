@@ -5,7 +5,6 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemo
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 
-print()
 api_key = input("Введите ключ к боту:")
 bot = Bot(token=api_key)
 dp = Dispatcher(bot, storage=MemoryStorage())
@@ -41,7 +40,8 @@ async def main_menu(message):
 
 @dp.callback_query_handler(text='formulas')
 async def get_formulas(call):
-    await call.message.answer("10 х вес (кг) + 6,25 x рост (см) – 5 х возраст (г) + 5", reply_markup=ReplyKeyboardRemove())
+    await call.message.answer("10 х вес (кг) + 6,25 x рост (см) – 5 х возраст (г) + 5",
+                              reply_markup=ReplyKeyboardRemove())
 
 
 @dp.callback_query_handler(text='calories')

@@ -4,7 +4,6 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 import asyncio
 
-print()
 api_key = input("Введите ключ к боту:")
 bot = Bot(token=api_key)
 dp = Dispatcher(bot, storage=MemoryStorage())
