@@ -3,6 +3,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from crud_functions import *
 
 kbrd_start = ReplyKeyboardMarkup(resize_keyboard=True,
                                  keyboard=[
@@ -91,21 +92,18 @@ async def send_calories(message, state):
 
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
-    prod = [{'name': 'Product1', 'description': 'описание 1', 'price': 100},
-            {'name': 'Product2', 'description': 'описание 2', 'price': 200},
-            {'name': 'Product3', 'description': 'описание 3', 'price': 300},
-            {'name': 'Product4', 'description': 'описание 4', 'price': 400}]
+    prod = get_all_products()
 
     for prod_i in prod:
-        await message.answer(f"Название: {prod_i['name']} | Описание: {prod_i['description']} | Цена: {prod_i['price']}")
-        with open(f"pictures/{prod_i['name']}_300x300.jpg", "rb") as img:
+        await message.answer(f"Название: {prod_i[1]} | Описание: {prod_i[2]} | Цена: {prod_i[3]}")
+        with open(prod_i[4], "rb") as img:
             await message.answer_photo(img)
     await message.answer("Выберите продукт для покупки:", reply_markup=kbrd_inline_buy)
 
 
 @dp.callback_query_handler(text="product_buying")
 async def send_confirm_message(call):
-    await call.message.answer("Вы успешно приобрели продукт!", reply_markup=ReplyKeyboardRemove())
+    await call.message.answer("Вы успешно приобрели продукт!")
 
 
 @dp.message_handler()
