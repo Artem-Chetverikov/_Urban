@@ -45,7 +45,7 @@ def insert_all_products():
 def delete_all_products():
     connection = sqlite3.connect("telegram.db")
     cursor = connection.cursor()
-    cursor.execute("DELETE * FROM Products")
+    cursor.execute("DELETE FROM Products")
     connection.commit()
     connection.close()
 
