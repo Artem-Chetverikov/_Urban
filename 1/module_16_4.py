@@ -27,12 +27,11 @@ async def root_adm():
 async def root_us_param(
         username: Annotated[str, Path(min_length=5, max_length=20, description='Enter username', example='UrbanUser')],
         age: Annotated[int, Path(ge=18, le=120, description='Enter age', example='24')]):
-    user = User(username=username, age=age, id=-1)
     if users:
-        user.id = users[-1].id + 1
+        user_id = users[-1].id + 1
     else:
-        user.id = 1
-
+        user_id = 1
+    user = User(username=username, age=age, id=user_id)
     users.append(user)
     return users[-1]
 
