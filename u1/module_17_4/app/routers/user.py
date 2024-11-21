@@ -23,10 +23,10 @@ async def all_users(db: Annotated[Session, Depends(get_db)]):
 async def user_by_id(db: Annotated[Session, Depends(get_db)], user_id: int):
     user = db.scalars(select(User).where(User.id == user_id)).one_or_none()
     if user is None:
-        return {
-            'status_code': status.HTTP_404_NOT_FOUND,
-            'transaction': 'User was not found'
-        }
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='User was not found'
+        )
     else:
         return user
 
@@ -49,10 +49,10 @@ async def create_user(db: Annotated[Session, Depends(get_db)], create_user: Crea
 async def update_user(db: Annotated[Session, Depends(get_db)], user_id: int, update_user: UpdateUser):
     user = db.scalars(select(User).where(User.id == user_id)).one_or_none()
     if user is None:
-        return {
-            'status_code': status.HTTP_404_NOT_FOUND,
-            'transaction': 'User was not found'
-        }
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='User was not found'
+        )
     else:
         db.execute(update(User).where(User.id == user_id).values(firstname=update_user.firstname,
                                                                  lastname=update_user.lastname,
@@ -68,10 +68,10 @@ async def update_user(db: Annotated[Session, Depends(get_db)], user_id: int, upd
 async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
     user = db.scalars(select(User).where(User.id == user_id)).one_or_none()
     if user is None:
-        return {
-            'status_code': status.HTTP_404_NOT_FOUND,
-            'transaction': 'User was not found'
-        }
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='User was not found'
+        )
     else:
         db.execute(delete(User).where(User.id == user_id))
         db.commit()
