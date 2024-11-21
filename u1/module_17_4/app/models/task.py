@@ -1,7 +1,7 @@
-from u1.module_17_3.app.backend.db import Base
+from u1.module_17_4.app.backend.db import Base
 from sqlalchemy import Column, ForeignKey, Integer, String, Boolean, Float
 from sqlalchemy.orm import relationship
-from u1.module_17_3.app.models.user import User
+from u1.module_17_4.app.models.user import User
 
 
 class Task(Base):

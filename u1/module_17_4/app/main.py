@@ -1,9 +1,9 @@
 import sys
 
-sys.path.insert(0, './1/module_17_3/app')
+sys.path.insert(0, './1/module_17_4/app')
 
 from fastapi import FastAPI
-from routers import task, user
+from u1.module_17_4.app.routers import task, user
 
 app = FastAPI()
 
@@ -16,4 +16,4 @@ async def welcome():
 app.include_router(task.router_task)
 app.include_router(user.router_user)
 
-# python -m uvicorn 1.module_17_3.app.main:app
+# python -m uvicorn u1.module_17_4.app.main:app
